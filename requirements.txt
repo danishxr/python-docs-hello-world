@@ -7,3 +7,7 @@ Werkzeug==0.14.1
 opencv-python==3.4.3
 collections-extended==1.0.2
 statistics==1.0.3.5
+jsonlib==1.6.1
+os-win==4.2.0
+glob2==0.6
+Flask-Cors==3.0.7

@@ -1,5 +1,13 @@
-from flask import Flask
+from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
+import logging
+import os
+from os import path
 import json
+# from t_t import engine
+import glob
+
+
 app = Flask(__name__)
 
 
@@ -421,3 +429,6 @@ def Upload_image():
         jfk = 0
 
     return json.dumps({"score": jfk, "text": op, "Exceptions": ex}, indent=4)
+
+
+

@@ -374,9 +374,12 @@ def Upload_image():
     files=request.files["image1"]
     
     
-    img_data=files.read()
-    
-    return "this sit should work"
+    #img_data=files.read()
+    if files:
+        
+        return "this sHit should work"
+    else:
+        return "this shit is not working"
 '''
     ass, ts, = engine(img_data)
     acne_string.append(ass)

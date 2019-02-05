@@ -375,6 +375,9 @@ def Upload_image():
     
     
     img_data=files.read()
+    
+    return json.dumps(img_data)
+'''
     ass, ts, = engine(img_data)
     acne_string.append(ass)
     trust_score.append(ts)
@@ -430,5 +433,5 @@ def Upload_image():
 
     return json.dumps({"score": jfk, "text": op, "Exceptions": ex}, indent=4)
 
-
+'''
 

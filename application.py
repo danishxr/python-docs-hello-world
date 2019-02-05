@@ -373,11 +373,11 @@ def Upload_image():
     
     files=request.files["image1"]
     
-    for each_num in range(1):
-        img_data=files[each_num].read()
-        ass, ts, = engine(img_data)
-        acne_string.append(ass)
-        trust_score.append(ts)
+    
+    img_data=files.read()
+    ass, ts, = engine(img_data)
+    acne_string.append(ass)
+    trust_score.append(ts)
     jas=[] #acne_string
     bas=[] #trust_score
 

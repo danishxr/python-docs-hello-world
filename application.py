@@ -376,7 +376,7 @@ def Upload_image():
     
     img_data=files.read()
     
-    return json.dumps(img_data)
+    return "this sit should work"
 '''
     ass, ts, = engine(img_data)
     acne_string.append(ass)

@@ -370,8 +370,8 @@ def Upload_image():
         return sum(lst) / len(lst) 
     acne_string=[]
     trust_score=[]
-    
-    files=request.files["image1"]
+    files=0
+    #files=request.files["image1"]
     
     
     #img_data=files.read()

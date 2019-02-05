@@ -6,7 +6,7 @@ from os import path
 import json
 # from t_t import engine
 import glob
-
+import uuid
 
 app = Flask(__name__)
 
@@ -376,6 +376,8 @@ def Upload_image():
     
     #img_data=files.read()
     if files:
+        temp_file_path=os.path.join('./Temp',str(uuid.uuid4())+'.jpg')
+        file_upload.save(temp_file_path)
         
         return "this sHit should work"
     else:

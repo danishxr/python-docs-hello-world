@@ -11,3 +11,4 @@ jsonlib==1.6.1
 os-win==4.2.0
 glob2==0.6
 Flask-Cors==3.0.7
+uuid==1.30

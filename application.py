@@ -361,7 +361,7 @@ def engine(data):
         #ex = 'exception occured'
 
         
-@app.route("/upload", methods = ['POST'])
+@app.route("/upload", methods = ['GET','POST'])
 #def hello():
     #return "Hello World!"
 def Upload_image():

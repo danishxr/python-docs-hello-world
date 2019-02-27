@@ -1,16 +1,20 @@
 from flask import Flask, request, jsonify
-#from flask_cors import CORS, cross_origin
-import flask_cors
+from flask_cors import CORS, cross_origin
 import logging
 import os
 from os import path
 import json
 # from t_t import engine
 import glob
-import uuid
+import cv2 as cv
+
+''' Current locally hosted API for the acne grade detection-working Normally'''
 
 app = Flask(__name__)
-
+CORS(app)
+UPLOAD_FOLDER='/home/centura/raghu/testing/'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER 
+'''Our thresholding script finally transformed to production level single function '''
 
 
 def engine(data):
@@ -35,7 +39,7 @@ def engine(data):
         
 
         u = image
-        
+        #u = data
         # to remove noise first we use smoothing technique
         smoothing = cv.GaussianBlur(u, (5, 5), cv.BORDER_DEFAULT)
 
@@ -329,10 +333,12 @@ def engine(data):
             acne_string.append('Not_identified')
             trust_score.append(0)
 
-            
+        files = glob.glob('/home/centura/raghu/testing/*.jpeg')
+        for f in files:
+            os.remove(f)
 
 
-        return acne_string,trust_score
+        return acne_string, trust_score
 
 
                 # print('Please take the photo in the good lighting condition')
@@ -362,31 +368,53 @@ def engine(data):
         #ex = 'exception occured'
 
         
-@app.route("/upload", methods = ['GET','POST'])
-#def hello():
-    #return "Hello World!"
+
+
+@app.route('/upload', methods=['GET', 'POST'])
 def Upload_image():
     #import cv2 as cv
     def avg(lst): 
         return sum(lst) / len(lst) 
     acne_string=[]
     trust_score=[]
-    files=0
-    #files=request.files["image1"]
     
-    
-    #img_data=files.read()
-    if files:
-        temp_file_path=os.path.join('./Temp',str(uuid.uuid4())+'.jpg')
-        file_upload.save(temp_file_path)
-        
-        return "this sHit should work"
+    files=request.files["image1"]
+    filename=files.filename
+    files.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+
+    files=request.files["image2"]
+    filename=files.filename
+    files.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+ 
+    files=request.files["image3"]
+    filename=files.filename
+    files.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+ 
+    files=request.files["image4"]
+    filename=files.filename
+    files.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+    # for i in range(4):
+    #     for file in glob.glob('/home/centura/raghu/testing/*.jpeg')
+    images = [cv.imread(file) for file in glob.glob('/home/centura/raghu/testing/*.jpeg')]
+    #taking each value
+    if len(images) < 4:
+        for i in range(4):
+            for each_num in images:
+                #img_data=files[each_num].read()
+                ass, ts, = engine(each_num)
+                acne_string.append(ass)
+                trust_score.append(ts)
+    elif len(images) == 4:
+        for each_num in images:
+            # img_data=files[each_num].read()
+            ass, ts, = engine(each_num)
+            acne_string.append(ass)
+            trust_score.append(ts)
     else:
-        return "this shit is not working"
-'''
-    ass, ts, = engine(img_data)
-    acne_string.append(ass)
-    trust_score.append(ts)
+        ass,ts ='mild', 100
+        acne_string.append(ass)
+        trust_score.append(ts)
+
     jas=[] #acne_string
     bas=[] #trust_score
 
@@ -439,5 +467,7 @@ def Upload_image():
 
     return json.dumps({"score": jfk, "text": op, "Exceptions": ex}, indent=4)
 
-'''
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', threaded=True, debug=True, port=5001)
 

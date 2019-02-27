@@ -370,7 +370,7 @@ def engine(data):
         
 
 
-@app.route('/upload', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def Upload_image():
     #import cv2 as cv
     def avg(lst): 
@@ -468,6 +468,6 @@ def Upload_image():
     return json.dumps({"score": jfk, "text": op, "Exceptions": ex}, indent=4)
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', threaded=True, debug=True, port=5001)
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0', threaded=True, debug=True, port=5001)
 

@@ -12,7 +12,7 @@ import cv2 as cv
 
 app = Flask(__name__)
 CORS(app)
-UPLOAD_FOLDER='/home/centura/raghu/testing/'
+UPLOAD_FOLDER='/home/raghu/testing/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER 
 '''Our thresholding script finally transformed to production level single function '''
 
@@ -333,7 +333,7 @@ def engine(data):
             acne_string.append('Not_identified')
             trust_score.append(0)
 
-        files = glob.glob('/home/centura/raghu/testing/*.jpeg')
+        files = glob.glob('/home/raghu/testing/*.jpeg')
         for f in files:
             os.remove(f)
 
@@ -394,8 +394,8 @@ def Upload_image():
     filename=files.filename
     files.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
     # for i in range(4):
-    #     for file in glob.glob('/home/centura/raghu/testing/*.jpeg')
-    images = [cv.imread(file) for file in glob.glob('/home/centura/raghu/testing/*.jpeg')]
+    #     for file in glob.glob('/home/raghu/testing/*.jpeg')
+    images = [cv.imread(file) for file in glob.glob('/home/raghu/testing/*.jpeg')]
     #taking each value
     if len(images) < 4:
         for i in range(4):

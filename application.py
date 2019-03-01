@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS, cross_origin
+#from flask_cors import CORS, cross_origin
 import logging
 import os
 from os import path
@@ -11,7 +11,7 @@ import cv2 as cv
 ''' Current locally hosted API for the acne grade detection-working Normally'''
 
 app = Flask(__name__)
-CORS(app)
+#CORS(app)
 UPLOAD_FOLDER='/home/raghu/testing/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER 
 '''Our thresholding script finally transformed to production level single function '''
